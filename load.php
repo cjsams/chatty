@@ -1,9 +1,14 @@
 <?php
+$db = new PDO('mysql:host=127.0.0.1;dbname=csams', 'csams', 'EQrNpz&237');
+$db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 
-$files = glob('msg/*.json');
+$query = $db->query("
+SELECT *
+FROM chat
+");
 $messages = array();
-foreach ($files as $file) {
-	$msg = json_decode(file_get_contents($file));
+while($msg= $query->fetch()){
+
 	if (!empty($msg)) {
 		$messages[] = $msg;
 	}
